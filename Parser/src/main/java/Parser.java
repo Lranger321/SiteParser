@@ -1,6 +1,8 @@
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import persistance.DataBase;
+import persistance.Logs;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,20 +27,14 @@ public class Parser {
         try {
             doc = Jsoup.connect("http://az.lib.ru/t/tolstoj_lew_nikolaewich/text_0073.shtml").get();
             parse(doc.children());
-            try {
-                dataBase.executeInsert();
-            } catch (SQLException ex) {
-                Main.logger.error(ex);
-                ex.printStackTrace();
-            }
+            dataBase.executeMultiInsert();
             writer.createStatistics();
         } catch (IOException ex) {
-            Main.logger.error(ex);
+            Logs.error(ex);
             ex.printStackTrace();
         }
     }
 
-    //TODO regex
     private void parse(Elements elements) {
         String text = elements.text();
         if (text.length() > 0) {

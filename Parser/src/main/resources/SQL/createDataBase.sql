@@ -1,0 +1,2 @@
+CREATE DATABASE [IF NOT EXISTS] votes;
+CREATE USER 'root'@'localhost' IDENTIFIED BY 'root';

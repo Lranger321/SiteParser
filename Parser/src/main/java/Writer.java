@@ -1,10 +1,11 @@
 import org.jsoup.Jsoup;
+import persistance.DataBase;
+import persistance.Logs;
+import persistance.MySQLDataBase;
 
 import java.util.List;
 
 import java.io.*;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 
 public class Writer {
@@ -26,12 +27,12 @@ public class Writer {
                 try {
                     writer.write(html);
                 } catch (IOException e) {
-                    Main.logger.error(e);
+                    Logs.error(e);
                 }
             writer.flush();
             writer.close();
         }catch (IOException e){
-            Main.logger.error(e);
+            Logs.error(e);
         }
 
     }
@@ -42,20 +43,20 @@ public class Writer {
             file.delete();
         }
         try {
-            List<String> statistic = dataBase.getStatistic();
+            List<String> statistic = dataBase.getStatistics();
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
             statistic.forEach(line->{
                 try {
                     writer.write(line);
                     writer.write("\n");
                 } catch (IOException ex) {
-                    Main.logger.error(ex);
+                    Logs.error(ex);
                     ex.printStackTrace();
                 }
             });
             writer.flush();
-        } catch (SQLException | IOException ex) {
-            Main.logger.error(ex);
+        } catch (IOException ex) {
+            Logs.error(ex);
             ex.printStackTrace();
         }
 
