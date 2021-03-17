@@ -4,9 +4,13 @@
         <File name="Exceptions" fileName="logs/exceptions.log" immediateFlush="true">
             <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
         </File>
+        <File name="Console" fileName="logs/search.log" immediateFlush="true">
+            <PatternLayout pattern="%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
     </appenders>
     <loggers>
         <root level="ALL">
+            <appender-ref ref="Console" level="debug"/>
             <appender-ref ref="Exceptions" level="error"/>
         </root>
 

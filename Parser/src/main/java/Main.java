@@ -6,13 +6,19 @@ import java.sql.SQLException;
 
 public class Main {
 
-    private static final String URL = "https://www.simbirsoft.com/";
+    private static final String URL = "http://az.lib.ru/t/tolstoj_lew_nikolaewich/text_0073.shtml";
 
     public static Logger logger;
 
-    public static void main(String[] args) throws IOException, SQLException {
+    public static void main(String[] args){
         logger = LogManager.getRootLogger();
-        DataBase dataBase = new DataBase();
+        DataBase dataBase = null;
+        try {
+            dataBase = new DataBase();
+        } catch (SQLException ex) {
+            Main.logger.error(ex);
+            ex.printStackTrace();
+        }
         Writer writer = new Writer(dataBase);
         writer.writeToFile(URL);
         Parser parser = new Parser(dataBase,writer);

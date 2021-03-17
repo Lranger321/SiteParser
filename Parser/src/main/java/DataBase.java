@@ -26,12 +26,20 @@ public class DataBase {
         multiInsert = new StringBuilder();
     }
 
-    public void concatMultiInsert(String word) throws SQLException {
-        System.out.println(word);
+    public void concatMultiInsert(String word) {
         boolean isStart = multiInsert.length() == 0;
         multiInsert.append((isStart) ? "" : ",").append("('").append(word).append("', 1)");
-        if (multiInsert.length() > 3000000) {
-            executeInsert();
+        if (multiInsert.length() > 300000) {
+            try {
+                executeInsert();
+            } catch (SQLException ex) {
+                Main.logger.info("INSERT INTO word_count(name,count) " +
+                        "VALUES " + multiInsert.toString() +
+                        " ON DUPLICATE KEY UPDATE count=count + 1");
+                Main.logger.error(ex);
+                multiInsert = new StringBuilder();
+                ex.printStackTrace();
+            }
             multiInsert = new StringBuilder();
         }
     }

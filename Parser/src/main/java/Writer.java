@@ -1,3 +1,5 @@
+import org.jsoup.Jsoup;
+
 import java.util.List;
 
 import java.io.*;
@@ -19,19 +21,15 @@ public class Writer {
             file.delete();
         }
         try {
-            URL url = new URL(address);
-            BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream(), StandardCharsets.UTF_8));
+            String html = Jsoup.connect(address).get().html();
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-            in.lines().forEach(line->{
                 try {
-                    writer.write(line);
-                    writer.write("\n");
+                    writer.write(html);
                 } catch (IOException e) {
                     Main.logger.error(e);
                 }
-            });
             writer.flush();
-            in.close();
+            writer.close();
         }catch (IOException e){
             Main.logger.error(e);
         }
