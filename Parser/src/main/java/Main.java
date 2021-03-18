@@ -1,19 +1,27 @@
 import persistance.*;
 
 import java.sql.SQLException;
+import java.util.Scanner;
 
 
 public class Main {
 
-    private static final String URL = "http://az.lib.ru/t/tolstoj_lew_nikolaewich/text_0073.shtml";
+    private static String url;
 
     public static void main(String[] args) {
-        long seconds = System.currentTimeMillis();
         Logs.init();
+        if(args.length > 0) {
+            url = args[0];
+        }else{
+            System.out.println("Insert url");
+            Scanner scanner = new Scanner(System.in);
+            url = scanner.next();
+        }
+        long seconds = System.currentTimeMillis();
         DataBase dataBase = getDataBase();
         Writer writer = new Writer(dataBase);
-        writer.writeToFile(URL);
-        Parser parser = new Parser(dataBase, writer);
+        writer.writeToFile(url);
+        Parser parser = new Parser(dataBase, url, writer);
         parser.parseFile();
         System.out.println("Everything is ok, time:"+(System.currentTimeMillis()-seconds)/1000+" s");
     }

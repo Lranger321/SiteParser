@@ -10,8 +10,8 @@
     </appenders>
     <loggers>
         <root level="ALL">
-            <appender-ref ref="Console" level="debug"/>
             <appender-ref ref="Exceptions" level="error"/>
+            <appender-ref ref="Console" level="debug"/>
         </root>
 
     </loggers>
