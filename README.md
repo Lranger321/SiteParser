@@ -11,6 +11,7 @@
 ```mvn exec:java -Dexec.mainClass="Main" -Dexec.args="<ссылка>"```
 
 ##2) Через JAR
+
 ```java -jar Parser.jar (ввести ссылку после заупска)```
 
 или
