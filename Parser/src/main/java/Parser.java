@@ -6,7 +6,6 @@ import persistance.Logs;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class Parser {
 
@@ -22,7 +21,7 @@ public class Parser {
         file = new File("site.txt");
     }
 
-    public void parseFile(){
+    public void parseFile() {
         Document doc;
         try {
             doc = Jsoup.connect("http://az.lib.ru/t/tolstoj_lew_nikolaewich/text_0073.shtml").get();

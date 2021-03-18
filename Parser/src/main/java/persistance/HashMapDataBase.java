@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class HashMapDataBase implements DataBase {
 
-    Map<String,Integer> words;
+    Map<String, Integer> words;
 
     public HashMapDataBase() {
         this.words = new HashMap<>();
@@ -17,7 +17,7 @@ public class HashMapDataBase implements DataBase {
     public void concatMultiInsert(String word) {
         words.put(
                 word,
-                words.getOrDefault(word,0)+1);
+                words.getOrDefault(word, 0) + 1);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class HashMapDataBase implements DataBase {
     @Override
     public List<String> getStatistics() {
         List<String> statistics = new ArrayList<>();
-        words.forEach((word,count)->{
+        words.forEach((word, count) -> {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder
                     .append(word)

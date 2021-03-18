@@ -1,0 +1,2 @@
+2021-03-18 11:46:03.453 [main] INFO   - Couldn't create MysqlDatabase
+2021-03-18 11:46:03.455 [main] ERROR  - java.sql.SQLException: Access denied for user ''@'localhost' (using password: NO)
